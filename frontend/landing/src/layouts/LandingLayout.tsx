@@ -1,50 +1,23 @@
 import { useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Navigate, Outlet, useParams } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { EmpresaProvider, useEmpresa } from '../context/EmpresaContext';
 import { useEmpresaTheme } from '../hooks/useEmpresaTheme';
 import NavBar from '../components/Navbars/LandingNavbar';
 import Footer from '../components/Footers/LandingFooter';
-import { theme } from '../theme';
 import EmpresaLoading from '../components/Loadings/EmpresaLoading';
-import { getEmpresaLanding, getFitControlLanding } from '../api/landing';
+import { getEmpresaLanding } from '../api/landing';
 
 const LandingLoader = () => {
-  const { slug } = useParams();
-  const {
-    setEmpresa,
-    setIsReady,
-    empresa,
-    isReady,
-    setFitControl,
-    fitControl,
-  } = useEmpresa();
+  const { setEmpresa, setIsReady, empresa, isReady, setFitControl } =
+    useEmpresa();
 
   const getLandingData = async () => {
     setIsReady(false);
     setEmpresa(null);
     setFitControl(null);
-    if (!slug) {
-      await getFitControlLanding()
-        .then((res) => {
-          if (res) {
-            setFitControl(res);
-          } else {
-            setFitControl(null);
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching FitControl landing data:', error);
-          setFitControl(null);
-        })
-        .finally(() => {
-          setIsReady(true);
-        });
-
-      return;
-    }
-    await getEmpresaLanding(slug)
+    await getEmpresaLanding()
       .then((res) => {
         if (res) {
           setEmpresa(res);
@@ -64,7 +37,7 @@ const LandingLoader = () => {
   useEffect(() => {
     getLandingData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
+  }, []);
 
   useEffect(() => {
     if (empresa) {
@@ -105,21 +78,6 @@ const LandingLoader = () => {
         <EmpresaLoading />
       </ThemeProvider>
     );
-  }
-
-  if (!slug) {
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <NavBar />
-        <Outlet />
-        <Footer />
-      </ThemeProvider>
-    );
-  }
-
-  if (!empresa && !fitControl) {
-    return <Navigate to="/gym-not-found" replace />;
   }
 
   return (

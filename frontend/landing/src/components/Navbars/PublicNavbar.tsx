@@ -12,15 +12,13 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useEmpresa } from '../../context/EmpresaContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import PrimaryButton from '../Buttons/PrimaryButton';
 
 const PublicNavbar = () => {
   const [open, setOpen] = useState(false);
-
-  const { slug } = useParams();
   const { empresa } = useEmpresa();
   const navigate = useNavigate();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -36,7 +34,7 @@ const PublicNavbar = () => {
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Box
           sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-          onClick={() => (empresa ? navigate(`/gym/${slug}`) : navigate(`/`))}
+          onClick={() => navigate(`/`)}
         >
           <img
             src={empresa?.logo || '/img/logo.png'}
@@ -59,16 +57,7 @@ const PublicNavbar = () => {
               <Box sx={{ width: 250 }} role="presentation">
                 <List>
                   <ListItem disablePadding>
-                    <ListItemButton
-                      onClick={() => {
-                        setOpen(false);
-                        if (empresa) {
-                          navigate(`/gym/${slug}`);
-                        } else {
-                          navigate(`/`);
-                        }
-                      }}
-                    >
+                    <ListItemButton onClick={() => navigate(`/`)}>
                       <ListItemText primary={'Inicio'} />
                     </ListItemButton>
                   </ListItem>
@@ -103,12 +92,7 @@ const PublicNavbar = () => {
         ) : (
           <>
             <Box>
-              <PrimaryButton
-                onClick={() =>
-                  empresa ? navigate(`/gym/${slug}`) : navigate(`/`)
-                }
-                isActive={false}
-              >
+              <PrimaryButton onClick={() => navigate(`/`)} isActive={false}>
                 Inicio
               </PrimaryButton>
               <PrimaryButton onClick={() => navigate('login')} isActive={false}>

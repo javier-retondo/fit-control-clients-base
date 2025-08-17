@@ -1,20 +1,11 @@
-import type { Empresa, FitControlLandingConfig } from '../types/Entities';
-import { empresasMock } from './mocks/empresas';
-import { fitcontrolMock } from './mocks/fitControl';
+import type { Empresa } from '../types/Entities';
+import { empresaData } from './data/empresas';
 
-export const getFitControlLanding =
-  async (): Promise<FitControlLandingConfig> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(fitcontrolMock.fitcontrol);
-      }, 300);
-    });
-  };
-
-export const getEmpresaLanding = async (slug: string): Promise<Empresa> => {
+export const getEmpresaLanding = async (): Promise<Empresa> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(empresasMock[slug as keyof typeof empresasMock]);
+      console.log('Fetching empresa data...', empresaData);
+      resolve(empresaData);
     }, 300);
   });
 };

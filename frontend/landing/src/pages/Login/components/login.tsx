@@ -12,7 +12,6 @@ import { useLogin } from '../../../context/LoginContext';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useGeneral } from '../../../context/GeneralContext';
 import { useNavigate } from 'react-router-dom';
-import { useEmpresa } from '../../../context/EmpresaContext';
 
 type LoginProps = {
   form: {
@@ -29,7 +28,6 @@ const LoginComp = ({ form, handleChange, setLoginCase }: LoginProps) => {
   const navigate = useNavigate();
   const { logout } = useLogin();
   const { setLoading } = useGeneral();
-  const { empresa } = useEmpresa();
 
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -105,11 +103,7 @@ const LoginComp = ({ form, handleChange, setLoginCase }: LoginProps) => {
           ¿No tenés cuenta?{' '}
           <Button
             variant="text"
-            onClick={() =>
-              empresa
-                ? navigate(`/gym/${empresa.slug}/register`)
-                : navigate('/register')
-            }
+            onClick={() => navigate('/register')}
             sx={{
               textTransform: 'none',
               color: 'primary.main',

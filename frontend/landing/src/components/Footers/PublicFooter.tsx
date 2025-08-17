@@ -10,17 +10,11 @@ const PublicFooter = () => {
   const navigate = useNavigate();
   const isFitControl = !empresa?.slug || empresa.slug === 'fitcontrol';
 
-  const secciones = isFitControl
-    ? [
-        { href: '/', label: 'Inicio' },
-        { href: '/login', label: 'Ingresar' },
-        { href: '/register', label: 'Registrarse' },
-      ]
-    : [
-        { href: `/gym/${empresa.slug}`, label: 'Inicio' },
-        { href: `/gym/${empresa.slug}/login`, label: 'Ingresar' },
-        { href: `/gym/${empresa.slug}/register`, label: 'Registrarse' },
-      ];
+  const secciones = [
+    { href: '/', label: 'Inicio' },
+    { href: '/login', label: 'Ingresar' },
+    { href: '/register', label: 'Registrarse' },
+  ];
 
   const redesFitControl = [
     { href: 'https://www.facebook.com/fitcontrolapp', icon: <FacebookIcon /> },

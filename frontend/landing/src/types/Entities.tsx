@@ -87,12 +87,6 @@ type LandingBase = {
   };
 };
 
-export type FitControlLandingConfig = LandingBase & {
-  beneficios: BeneficioVisual[];
-  beneficios_cta: string[];
-  clientes: ClienteTestimonio[];
-};
-
 export type EmpresaLanding = LandingBase & {
   clases: Clase[];
   sedes: Sede[];
@@ -107,12 +101,4 @@ export type Empresa = {
   colores: EmpresaColorConfig;
   redes?: EmpresaRedes;
   landing: EmpresaLanding;
-};
-
-export type EmpresaMap = {
-  [slug: string]: Empresa;
-};
-
-export type FitControlMock = {
-  fitcontrol: FitControlLandingConfig;
 };

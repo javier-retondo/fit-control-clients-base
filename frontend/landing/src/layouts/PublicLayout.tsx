@@ -1,28 +1,42 @@
-import { Outlet, useParams } from 'react-router-dom';
-import { Box, ThemeProvider } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+import { Box, CssBaseline, ThemeProvider } from '@mui/material';
 import { EmpresaProvider, useEmpresa } from '../context/EmpresaContext';
 import { useEmpresaTheme } from '../hooks/useEmpresaTheme';
 import { useEffect } from 'react';
-import { empresasMock } from '../api/mocks/empresas';
 import PublicNavbar from '../components/Navbars/PublicNavbar';
-import { theme } from '../theme';
 import PublicFooter from '../components/Footers/PublicFooter';
+import { getEmpresaLanding } from '../api/landing';
+import EmpresaLoading from '../components/Loadings/EmpresaLoading';
 
 const PublicLoader = () => {
-  const { slug } = useParams();
-  const { setEmpresa, setIsReady, empresa } = useEmpresa();
+  const { setEmpresa, setIsReady, empresa, isReady, setFitControl } =
+    useEmpresa();
+
+  const getLandingData = async () => {
+    setIsReady(false);
+    setEmpresa(null);
+    setFitControl(null);
+    await getEmpresaLanding()
+      .then((res) => {
+        if (res) {
+          setEmpresa(res);
+        } else {
+          setEmpresa(null);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching empresa landing data:', error);
+        setEmpresa(null);
+      })
+      .finally(() => {
+        setIsReady(true);
+      });
+  };
 
   useEffect(() => {
-    setIsReady(false);
-    const data = empresasMock[slug as keyof typeof empresasMock];
-    if (data) {
-      setEmpresa(data);
-    } else {
-      setEmpresa(null);
-    }
-    setIsReady(true);
+    getLandingData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
+  }, []);
 
   useEffect(() => {
     if (empresa) {
@@ -56,17 +70,15 @@ const PublicLoader = () => {
 
   const EmpresaTheme = useEmpresaTheme();
 
-  if (!slug) {
+  if (!isReady) {
     return (
-      <ThemeProvider theme={theme}>
-        <Box>
-          <PublicNavbar />
-          <Outlet />
-          <PublicFooter />
-        </Box>
+      <ThemeProvider theme={EmpresaTheme}>
+        <CssBaseline />
+        <EmpresaLoading />
       </ThemeProvider>
     );
   }
+
   return (
     <ThemeProvider theme={EmpresaTheme}>
       <Box>

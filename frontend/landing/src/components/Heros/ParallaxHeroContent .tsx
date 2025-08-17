@@ -7,8 +7,6 @@ const ParallaxHeroContent = ({
   subtitulo,
   imagenDecorativa,
   cta,
-  isFitcontrol,
-  demo,
   navigate,
 }: {
   titulo?: string;
@@ -75,43 +73,6 @@ const ParallaxHeroContent = ({
           {cta?.label}
         </PrimaryButton>
       </Parallax>
-      {(isFitcontrol || demo) && (
-        <Parallax speed={-5}>
-          <Box sx={{ mt: 6 }}>
-            <Typography
-              variant="body2"
-              sx={{
-                mt: 2,
-                color: 'text.secondary',
-              }}
-            >
-              {demo ? '¿Te gustó la demo?' : '¿Querés ver una demo?'}{' '}
-              <Box
-                component="a"
-                onClick={() => {
-                  if (demo) {
-                    navigate('/');
-                  } else {
-                    navigate('/gym/demo-gymx');
-                  }
-                }}
-                sx={{
-                  color: 'primary.main',
-                  textDecoration: 'underline',
-                  fontWeight: 'medium',
-                  cursor: 'pointer',
-                  '&:hover': {
-                    color: 'background.paper',
-                    textDecoration: 'none',
-                  },
-                }}
-              >
-                {demo ? 'Volver a FitControl' : 'Ver demo'}
-              </Box>
-            </Typography>
-          </Box>
-        </Parallax>
-      )}
     </Box>
   </Box>
 );
