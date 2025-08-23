@@ -14,36 +14,36 @@ export class Payment {
 
    private constructor(payment: PaymentDto, status: Status) {
       const amountValue = Amount.create(payment.amount);
-      this.id = payment.id ? payment.id : uuid();
+      this.id = payment.id || uuid();
       this.subscriptionId = payment.subscriptionId;
       this.amount = amountValue.getValue();
       this.status = status;
       this.paymentMethod = payment.paymentMethod;
-      this.createdAt = payment.createdAt ? payment.createdAt : new Date();
-      this.updatedAt = payment.updatedAt ? payment.updatedAt : new Date();
+      this.createdAt = payment.createdAt || new Date();
+      this.updatedAt = payment.updatedAt || new Date();
    }
 
-   static createPayment(payment: PaymentDto): Payment {
+   static create(payment: PaymentDto): Payment {
       return new Payment(payment, Status.PENDING);
    }
 
-   static rebuildPayment(payment: PaymentDto): Payment {
+   static rebuild(payment: PaymentDto): Payment {
       return new Payment(payment, payment.status);
    }
 
-   paymentAccepted(): void {
+   accepted(): void {
       this.status = Status.ACCEPTED;
    }
 
-   paymentFailed(): void {
+   failed(): void {
       this.status = Status.FAILED;
    }
 
-   paymentRejected(): void {
+   rejected(): void {
       this.status = Status.REJECTED;
    }
 
-   getPayment(): PaymentDto {
+   get(): PaymentDto {
       return {
          id: this.id,
          subscriptionId: this.subscriptionId,

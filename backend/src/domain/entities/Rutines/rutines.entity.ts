@@ -16,8 +16,8 @@ export class Rutine {
    private exercises: Exercise[];
 
    private constructor(rutine: RutinesDto, status: Status) {
-      this.id = rutine.id ? rutine.id : uuid();
-      this.date = rutine.date ? new Date(rutine.date) : new Date();
+      this.id = rutine.id || uuid();
+      this.date = rutine.date || new Date();
       this.partnerId = rutine.partnerId;
       this.instructorId = rutine.instructorId;
       this.weekDay = rutine.weekDay;
@@ -28,11 +28,11 @@ export class Rutine {
       this.exercises = [];
    }
 
-   static createRutine(rutine: RutinesDto): Rutine {
+   static create(rutine: RutinesDto): Rutine {
       return new Rutine(rutine, Status.ACTIVE);
    }
 
-   static rebuildRutine(rutine: RutinesDto): Rutine {
+   static rebuild(rutine: RutinesDto): Rutine {
       return new Rutine(rutine, rutine.status);
    }
 
@@ -41,7 +41,7 @@ export class Rutine {
    }
 
    deleteExercise(exercise: Exercise): void {
-      this.exercises = this.exercises.filter((e) => e.id !== exercise.id);
+      this.exercises = this.exercises.filter((e) => e.get().id !== exercise.get().id);
    }
 
    suspend(): void {
@@ -52,7 +52,7 @@ export class Rutine {
       this.status = Status.ACTIVE;
    }
 
-   getRutine(): RutinesDto {
+   get(): RutinesDto {
       return {
          id: this.id,
          date: this.date,
@@ -63,11 +63,11 @@ export class Rutine {
          objective: this.objective,
          description: this.description,
          status: this.status,
-         exercises: this.exercises?.map((exercise) => exercise) || [],
+         exercises: this.exercises?.map((exercise) => exercise.get()) || [],
       };
    }
 
-   updateRutine(
+   update(
       rutine: Pick<RutinesDto, 'instructorId' | 'name' | 'objective' | 'description' | 'weekDay'>,
    ): void {
       this.instructorId = rutine.instructorId ? rutine.instructorId : this.instructorId;

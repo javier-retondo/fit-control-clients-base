@@ -1,6 +1,9 @@
 import { v4 as uuid } from 'uuid';
 import { Roles } from '../../enums';
 import { UserDto } from './user.dto';
+import { Rutine } from '../Rutines/rutines.entity';
+import { Subscription } from '../Suscription/suscription.entity';
+import { MedicalRecord } from '../MedicalRecord/medical-record.entity';
 
 export class User {
    private id: string;
@@ -14,9 +17,9 @@ export class User {
    private role: Roles;
 
    // Partners features
-   private rutines?: any; // TODO: definir entidad -> Solo Socios
-   private suscriptions?: any; // TODO: definir entidad -> Solo Socios
-   private medicalRecord?: any; // TODO: definir entidad -> Solo Socios
+   private rutines?: Rutine[];
+   private suscriptions?: Subscription[];
+   private medicalRecord?: MedicalRecord;
    private workoutReservations?: any; // TODO: definir entidad -> Solo Socios
 
    // Instructor features
@@ -33,7 +36,7 @@ export class User {
       this.role = role;
    }
 
-   static createUser(user: UserDto, role: Roles): User {
+   static create(user: UserDto, role: Roles): User {
       return new User(
          {
             id: uuid(),
@@ -43,7 +46,7 @@ export class User {
       );
    }
 
-   static rebuildUser(user: UserDto): User {
+   static rebuild(user: UserDto): User {
       return new User(user, user.role);
    }
 
@@ -60,13 +63,5 @@ export class User {
       this.workoutReservations = this.workoutReservations.filter(
          (reservation: any) => reservation.id !== reservationId,
       );
-   }
-
-   addMedicalRecord(record: any): void {
-      this.medicalRecord.push(record);
-   }
-
-   deleteMedicalRecord(recordId: string): void {
-      this.medicalRecord = this.medicalRecord.filter((record: any) => record.id !== recordId);
    }
 }

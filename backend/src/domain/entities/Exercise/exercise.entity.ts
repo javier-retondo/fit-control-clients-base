@@ -2,17 +2,17 @@ import { v4 as uuid } from 'uuid';
 import { ExerciseDto } from './exercise.dto';
 
 export class Exercise {
-   id: string;
-   rutineId: string;
-   name: string;
-   description: string;
-   series: number;
-   duration?: number; // Segundos
-   repetitions?: number;
-   video_url?: string;
+   private id: string;
+   private rutineId: string;
+   private name: string;
+   private description: string;
+   private series: number;
+   private duration?: number; // Segundos
+   private repetitions?: number;
+   private video_url?: string;
 
    private constructor(exercise: ExerciseDto) {
-      this.id = exercise.id ? exercise.id : uuid();
+      this.id = exercise.id || uuid();
       this.rutineId = exercise.rutineId;
       this.name = exercise.name;
       this.description = exercise.description;
@@ -22,12 +22,25 @@ export class Exercise {
       this.video_url = exercise.video_url;
    }
 
-   static createExercise(exercise: ExerciseDto): Exercise {
+   static create(exercise: ExerciseDto): Exercise {
       return new Exercise(exercise);
    }
 
-   static rebuildExercise(exercise: ExerciseDto): Exercise {
+   static rebuild(exercise: ExerciseDto): Exercise {
       return new Exercise(exercise);
+   }
+
+   get(): ExerciseDto {
+      return {
+         id: this.id,
+         rutineId: this.rutineId,
+         name: this.name,
+         description: this.description,
+         series: this.series,
+         duration: this.duration,
+         repetitions: this.repetitions,
+         video_url: this.video_url,
+      };
    }
 
    setVideoUrl(url: string): void {

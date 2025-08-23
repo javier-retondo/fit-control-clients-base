@@ -4,13 +4,13 @@ import { SubscriptionDto } from './suscription.dto';
 import { Dates, Amount } from './value-objects';
 
 export class Subscription {
-   id: string;
-   partnerId: string;
-   planId: string;
-   startDate: Date;
-   endDate: Date;
-   amount: number;
-   status: Status;
+   private id: string;
+   private partnerId: string;
+   private planId: string;
+   private startDate: Date;
+   private endDate: Date;
+   private amount: number;
+   private status: Status;
 
    private constructor(subscription: SubscriptionDto, status: Status) {
       const amountValue = Amount.create(subscription.amount);
@@ -24,11 +24,11 @@ export class Subscription {
       this.status = status;
    }
 
-   static createSubscription(subscription: SubscriptionDto): Subscription {
+   static create(subscription: SubscriptionDto): Subscription {
       return new Subscription(subscription, Status.ACTIVE);
    }
 
-   static rebuildSubscription(subscription: SubscriptionDto): Subscription {
+   static rebuild(subscription: SubscriptionDto): Subscription {
       return new Subscription(subscription, subscription.status);
    }
 
@@ -40,5 +40,17 @@ export class Subscription {
       if (this.startDate > new Date() || this.endDate < new Date()) {
          this.inactiveSubscription();
       }
+   }
+
+   get(): SubscriptionDto {
+      return {
+         id: this.id,
+         partnerId: this.partnerId,
+         planId: this.planId,
+         startDate: this.startDate,
+         endDate: this.endDate,
+         amount: this.amount,
+         status: this.status,
+      };
    }
 }

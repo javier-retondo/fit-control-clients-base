@@ -4,19 +4,19 @@ import { PlanDto } from './plan.dto';
 import { Dates, Amount } from './value-objects';
 
 export class Plan {
-   id: string;
-   name: string;
-   description: string;
-   startDate: Date;
-   endDate: Date;
-   status: Status;
-   type: PlanType;
-   amount: number;
+   private id: string;
+   private name: string;
+   private description: string;
+   private startDate: Date;
+   private endDate: Date;
+   private status: Status;
+   private type: PlanType;
+   private amount: number;
 
    private constructor(plan: PlanDto, status: Status) {
       const amountValue = Amount.create(plan.amount);
       const dates = Dates.create(plan.startDate, plan.endDate);
-      this.id = plan.id ? plan.id : uuid();
+      this.id = plan.id || uuid();
       this.name = plan.name;
       this.description = plan.description;
       this.startDate = dates.getStartDate();
@@ -26,11 +26,11 @@ export class Plan {
       this.amount = amountValue.getValue();
    }
 
-   static createPlan(plan: PlanDto): Plan {
+   static create(plan: PlanDto): Plan {
       return new Plan(plan, Status.ACTIVE);
    }
 
-   static rebuildPlan(plan: PlanDto): Plan {
+   static rebuild(plan: PlanDto): Plan {
       return new Plan(plan, plan.status);
    }
 
@@ -60,12 +60,23 @@ export class Plan {
       }
    }
 
-   updatePlan(
-      plan: Pick<PlanDto, 'name' | 'description' | 'amount' | 'startDate' | 'endDate'>,
-   ): void {
+   update(plan: Pick<PlanDto, 'name' | 'description' | 'amount' | 'startDate' | 'endDate'>): void {
       this.name = plan.name;
       this.description = plan.description;
       this.setAmount(plan.amount);
       this.setDates(plan.startDate, plan.endDate);
+   }
+
+   get(): PlanDto {
+      return {
+         id: this.id,
+         name: this.name,
+         description: this.description,
+         startDate: this.startDate,
+         endDate: this.endDate,
+         status: this.status,
+         type: this.type,
+         amount: this.amount,
+      };
    }
 }

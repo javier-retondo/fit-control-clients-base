@@ -5,4 +5,5 @@ export enum Status {
    FAILED = 'Fallido',
    REJECTED = 'Rechazado',
    ACCEPTED = 'Aceptado',
+   CANCELED = 'Cancelado',
 }
