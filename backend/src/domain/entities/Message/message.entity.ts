@@ -4,6 +4,7 @@ export class Message {
    private id: string;
    private senderId: string;
    private recipientId: string;
+   private title: string;
    private content: string;
    private timestamp: Date;
    private status: 'sent' | 'delivered' | 'read';
@@ -14,6 +15,7 @@ export class Message {
       this.recipientId = message.recipientId;
       this.content = message.content;
       this.timestamp = message.timestamp;
+      this.title = message.title;
       this.status = status;
    }
 
@@ -33,6 +35,7 @@ export class Message {
          content: this.content,
          timestamp: this.timestamp,
          status: this.status,
+         title: this.title,
       };
    }
 
