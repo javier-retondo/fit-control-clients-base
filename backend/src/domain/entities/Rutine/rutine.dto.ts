@@ -1,9 +1,8 @@
 import { Status, WeekDay } from '../../enums';
 import { ExerciseDto } from '../Exercise/exercise.dto';
 
-export interface RutinesDto {
+export interface RutineDto {
    id?: string;
-   date?: Date;
    partnerId: string;
    instructorId: string;
    weekDay: WeekDay;
@@ -12,4 +11,6 @@ export interface RutinesDto {
    description: string;
    status: Status;
    exercises?: ExerciseDto[];
+   createdAt?: Date;
+   updatedAt?: Date;
 }

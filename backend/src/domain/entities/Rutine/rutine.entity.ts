@@ -1,11 +1,10 @@
 import { v4 as uuid } from 'uuid';
 import { WeekDay, Status } from '../../enums';
-import { RutinesDto } from './rutines.dto';
+import { RutineDto } from './rutine.dto';
 import { Exercise } from '../Exercise/exercise.entity';
 
 export class Rutine {
    private id: string;
-   private date: Date;
    private partnerId: string;
    private instructorId: string;
    private weekDay: WeekDay;
@@ -13,11 +12,12 @@ export class Rutine {
    private objective: string;
    private description: string;
    private status: Status;
+   private createdAt: Date;
+   private updatedAt: Date;
    private exercises: Exercise[];
 
-   private constructor(rutine: RutinesDto, status: Status) {
+   private constructor(rutine: RutineDto, status: Status) {
       this.id = rutine.id || uuid();
-      this.date = rutine.date || new Date();
       this.partnerId = rutine.partnerId;
       this.instructorId = rutine.instructorId;
       this.weekDay = rutine.weekDay;
@@ -26,13 +26,15 @@ export class Rutine {
       this.description = rutine.description;
       this.status = status;
       this.exercises = [];
+      this.createdAt = rutine.createdAt || new Date();
+      this.updatedAt = rutine.updatedAt || new Date();
    }
 
-   static create(rutine: RutinesDto): Rutine {
+   static create(rutine: Omit<RutineDto, 'id' | 'createdAt' | 'updatedAt'>): Rutine {
       return new Rutine(rutine, Status.ACTIVE);
    }
 
-   static rebuild(rutine: RutinesDto): Rutine {
+   static rebuild(rutine: RutineDto): Rutine {
       return new Rutine(rutine, rutine.status);
    }
 
@@ -52,10 +54,9 @@ export class Rutine {
       this.status = Status.ACTIVE;
    }
 
-   get(): RutinesDto {
+   get(): RutineDto {
       return {
          id: this.id,
-         date: this.date,
          partnerId: this.partnerId,
          instructorId: this.instructorId,
          weekDay: this.weekDay,
@@ -63,17 +64,20 @@ export class Rutine {
          objective: this.objective,
          description: this.description,
          status: this.status,
+         createdAt: this.createdAt,
+         updatedAt: this.updatedAt,
          exercises: this.exercises?.map((exercise) => exercise.get()) || [],
       };
    }
 
    update(
-      rutine: Pick<RutinesDto, 'instructorId' | 'name' | 'objective' | 'description' | 'weekDay'>,
+      rutine: Pick<RutineDto, 'instructorId' | 'name' | 'objective' | 'description' | 'weekDay'>,
    ): void {
       this.instructorId = rutine.instructorId ? rutine.instructorId : this.instructorId;
       this.weekDay = rutine.weekDay ? rutine.weekDay : this.weekDay;
       this.name = rutine.name ? rutine.name : this.name;
       this.objective = rutine.objective ? rutine.objective : this.objective;
       this.description = rutine.description ? rutine.description : this.description;
+      this.updatedAt = new Date();
    }
 }

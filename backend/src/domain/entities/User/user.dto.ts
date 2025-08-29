@@ -9,6 +9,7 @@ export interface UserDto {
    password?: string;
    isTemporaryPassword?: boolean;
    role: Roles;
+
    rutines?: any;
    suscriptions?: any;
    medicalRecord?: any;
