@@ -1,4 +1,6 @@
 import { Roles } from '../../enums';
+import { RutineDto } from '../Rutine';
+import { SubscriptionDto } from '../Suscription';
 
 export interface UserDto {
    id?: string;
@@ -10,8 +12,8 @@ export interface UserDto {
    isTemporaryPassword?: boolean;
    role: Roles;
 
-   rutines?: any;
-   suscriptions?: any;
+   rutines?: RutineDto[];
+   suscriptions?: SubscriptionDto[];
    medicalRecord?: any;
    workoutReservations?: any;
    workout?: any;
