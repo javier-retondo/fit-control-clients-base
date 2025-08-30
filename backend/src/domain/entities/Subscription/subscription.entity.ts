@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { Status } from '../../enums';
-import { SubscriptionDto } from './suscription.dto';
+import { SubscriptionDto } from './subscription.dto';
 import { Dates, Amount } from './value-objects';
 
 export class Subscription {

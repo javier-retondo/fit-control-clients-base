@@ -1,6 +1,6 @@
 import { Roles } from '../../enums';
 import { RutineDto } from '../Rutine';
-import { SubscriptionDto } from '../Suscription';
+import { SubscriptionDto } from '../Subscription';
 
 export interface UserDto {
    id?: string;

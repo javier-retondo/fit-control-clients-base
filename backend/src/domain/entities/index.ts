@@ -8,7 +8,7 @@ export * from './Payment';
 export * from './Plan';
 export * from './Reservation';
 export * from './Rutine';
-export * from './Suscription';
+export * from './Subscription';
 export * from './User';
 export * from './Workout';
 export * from './WorkoutSchedule';

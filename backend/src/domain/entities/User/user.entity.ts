@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { Roles } from '../../enums';
 import { UserDto } from './user.dto';
 import { Rutine } from '../Rutine/rutine.entity';
-import { Subscription } from '../Suscription/suscription.entity';
+import { Subscription } from '../Subscription/subscription.entity';
 import { MedicalRecord } from '../MedicalRecord/medical-record.entity';
 
 export class User {
