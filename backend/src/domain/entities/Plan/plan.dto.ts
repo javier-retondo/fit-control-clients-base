@@ -9,4 +9,6 @@ export interface PlanDto {
    status: Status;
    type: PlanType;
    amount: number;
+   benefits: string[];
+   featured: boolean;
 }

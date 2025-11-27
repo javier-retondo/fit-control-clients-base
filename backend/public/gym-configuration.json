@@ -1,0 +1,41 @@
+{
+   "id": 1,
+   "slug": "demo-gymx",
+   "name": "GymX Demo",
+   "logo": "/img/logoX.png",
+   "colors": {
+      "primary": "#FF5722",
+      "secondary": "#FFC107"
+   },
+   "networks": {
+      "instagram": "https://instagram.com/gymxdemo",
+      "facebook": "https://facebook.com/gymxdemo",
+      "whatsapp": "https://wa.me/5493512345678"
+   },
+   "landing": {
+      "hero": {
+         "title": "Bienvenido a GymX Demo",
+         "subtitle": "Entrená con los mejores instructores y reservá tus clases online",
+         "images": ["/img/sede_5.webp", "/img/sede_4.webp", "/img/sede_2.webp"],
+         "decorativeImage": "/img/boy-pesa.png",
+         "cta": {
+            "label": "Acceso Socios",
+            "href": "login"
+         }
+      },
+      "classes": [],
+      "locations": [],
+      "ctaSection": {
+         "title": "¿Ya sos socio?",
+         "subtitle": "Ingresá al sistema y reservá tus próximas clases",
+         "image": "/img/boy-tip.png",
+         "hoverImage": "/img/boy-feliz.png",
+         "background": "/img/sede_4.webp",
+         "cta": {
+            "label": "Registrate ahora",
+            "href": "/register"
+         }
+      },
+      "plans": []
+   }
+}

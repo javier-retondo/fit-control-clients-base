@@ -7,4 +7,5 @@ export interface HeadquarterDto {
    capacity: number;
    description: string;
    status: Status;
+   imageUrl?: string;
 }

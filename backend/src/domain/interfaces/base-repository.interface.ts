@@ -8,7 +8,7 @@
 export interface IBaseRepository<T, V, U = unknown> {
    findById(id: string | number, transaction?: U): Promise<T | null>;
    findAll(
-      options: IFindOptions<V> & { page: number; limit: number },
+      options: IFindOptions<V>,
       transaction?: U,
    ): Promise<IPaginatedResult<T>>;
 
@@ -41,6 +41,10 @@ export type Where<T> = {
 export interface IFindOptions<T> {
    where?: Partial<Where<T>>;
    order?: Partial<Record<keyof T, 'ASC' | 'DESC'>>;
+    pagination?: {
+    page: number;
+    limit: number;
+  };
 }
 
 export interface IPaginatedResult<T> {

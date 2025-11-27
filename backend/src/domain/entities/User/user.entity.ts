@@ -64,4 +64,17 @@ export class User {
          (reservation: any) => reservation.id !== reservationId,
       );
    }
+
+   get(): UserDto {
+      return {
+         id: this.id,
+         name: this.name,
+         lastName: this.lastName,
+         email: this.email,
+         user: this.user,
+         password: this.password,
+         isTemporaryPassword: this.isTemporaryPassword,
+         role: this.role,
+      };
+   }
 }

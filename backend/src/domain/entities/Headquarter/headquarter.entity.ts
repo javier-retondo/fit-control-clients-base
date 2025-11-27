@@ -9,6 +9,7 @@ export class Headquarter {
    private capacity: number;
    private description: string;
    private status: Status;
+   private imageUrl?: string;
 
    private constructor(site: HeadquarterDto, status: Status) {
       this.id = site.id || uuid();
@@ -17,6 +18,7 @@ export class Headquarter {
       this.capacity = site.capacity;
       this.description = site.description;
       this.status = status;
+      this.imageUrl = site.imageUrl;
    }
 
    static create(site: HeadquarterDto): Headquarter {
@@ -35,6 +37,7 @@ export class Headquarter {
          capacity: this.capacity,
          description: this.description,
          status: this.status,
+         imageUrl: this.imageUrl,
       };
    }
 
@@ -44,5 +47,6 @@ export class Headquarter {
       this.capacity = site.capacity;
       this.description = site.description;
       this.status = site.status;
+      this.imageUrl = site.imageUrl;
    }
 }

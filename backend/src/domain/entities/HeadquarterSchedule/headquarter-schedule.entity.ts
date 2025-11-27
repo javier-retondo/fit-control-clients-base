@@ -1,10 +1,11 @@
 import { v4 as uuid } from 'uuid';
 import { WeekDay } from '../../enums';
 import { HeadquarterScheduleDTO } from './headquarter-schedule.dto';
+import { Headquarter } from '../Headquarter/headquarter.entity';
 
 export class HeadquarterSchedule {
    private id: string;
-   private headquarterId: string;
+   private headquarter: Headquarter;
    private startHour: Date;
    private endHour: Date;
    private weekDay: WeekDay;
@@ -12,7 +13,7 @@ export class HeadquarterSchedule {
 
    private constructor(headquarterWorkoutSchedule: HeadquarterScheduleDTO) {
       this.id = headquarterWorkoutSchedule.id || uuid();
-      this.headquarterId = headquarterWorkoutSchedule.headquarterId;
+      this.headquarter = Headquarter.rebuild(headquarterWorkoutSchedule.headquarter);
       this.startHour = headquarterWorkoutSchedule.startHour;
       this.endHour = headquarterWorkoutSchedule.endHour;
       this.weekDay = headquarterWorkoutSchedule.weekDay;
@@ -30,7 +31,7 @@ export class HeadquarterSchedule {
    get(): HeadquarterScheduleDTO {
       return {
          id: this.id,
-         headquarterId: this.headquarterId,
+         headquarter: this.headquarter.get(),
          startHour: this.startHour,
          endHour: this.endHour,
          weekDay: this.weekDay,
@@ -39,7 +40,7 @@ export class HeadquarterSchedule {
    }
 
    update(headquarterWorkoutSchedule: HeadquarterScheduleDTO) {
-      this.headquarterId = headquarterWorkoutSchedule.headquarterId;
+      this.headquarter = Headquarter.rebuild(headquarterWorkoutSchedule.headquarter);
       this.startHour = headquarterWorkoutSchedule.startHour;
       this.endHour = headquarterWorkoutSchedule.endHour;
       this.weekDay = headquarterWorkoutSchedule.weekDay;

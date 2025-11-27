@@ -12,6 +12,8 @@ export class Plan {
    private status: Status;
    private type: PlanType;
    private amount: number;
+   private benefits: string[];
+   private featured: boolean;
 
    private constructor(plan: PlanDto, status: Status) {
       const amountValue = Amount.create(plan.amount);
@@ -24,6 +26,8 @@ export class Plan {
       this.status = status;
       this.type = plan.type;
       this.amount = amountValue.getValue();
+      this.benefits = plan.benefits;
+      this.featured = plan.featured;
    }
 
    static create(plan: PlanDto): Plan {
@@ -77,6 +81,8 @@ export class Plan {
          status: this.status,
          type: this.type,
          amount: this.amount,
+         benefits: this.benefits,
+         featured: this.featured,
       };
    }
 }
