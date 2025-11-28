@@ -1,7 +1,7 @@
 import { Status } from '../../enums';
 
 export interface HeadquarterDto {
-   id?: string;
+   id: string;
    name: string;
    location: string;
    capacity: number;

@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { Status } from '../../enums';
 import { SubscriptionDto } from './subscription.dto';
 import { Dates, Amount } from './value-objects';
@@ -15,7 +14,7 @@ export class Subscription {
    private constructor(subscription: SubscriptionDto, status: Status) {
       const amountValue = Amount.create(subscription.amount);
       const dates = Dates.create(subscription.startDate, subscription.endDate);
-      this.id = subscription.id ? subscription.id : uuid();
+      this.id = subscription.id;
       this.partnerId = subscription.partnerId;
       this.planId = subscription.planId;
       this.startDate = dates.getStartDate();

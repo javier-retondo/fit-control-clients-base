@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { WorkoutType } from '../../enums/workout-type.enum';
 import { WorkoutDto } from './workout.dto';
 import { HeadquarterSchedule } from '../HeadquarterSchedule';
@@ -13,7 +12,7 @@ export class Workout {
    private schedules?: HeadquarterSchedule[];
 
    private constructor(dto: WorkoutDto) {
-      this.id = dto.id || uuid();
+      this.id = dto.id;
       this.type = dto.type;
       this.name = dto.name;
       this.description = dto.description;

@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { WeekDay } from '../../enums';
 import { HeadquarterScheduleDTO } from './headquarter-schedule.dto';
 import { Headquarter } from '../Headquarter/headquarter.entity';
@@ -12,7 +11,7 @@ export class HeadquarterSchedule {
    private holiday: boolean;
 
    private constructor(headquarterWorkoutSchedule: HeadquarterScheduleDTO) {
-      this.id = headquarterWorkoutSchedule.id || uuid();
+      this.id = headquarterWorkoutSchedule.id;
       this.headquarter = Headquarter.rebuild(headquarterWorkoutSchedule.headquarter);
       this.startHour = headquarterWorkoutSchedule.startHour;
       this.endHour = headquarterWorkoutSchedule.endHour;

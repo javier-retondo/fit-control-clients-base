@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { Status } from '../../enums';
 import { HeadquarterDto } from './headquarter.dto';
 
@@ -12,7 +11,7 @@ export class Headquarter {
    private imageUrl?: string;
 
    private constructor(site: HeadquarterDto, status: Status) {
-      this.id = site.id || uuid();
+      this.id = site.id;
       this.name = site.name;
       this.location = site.location;
       this.capacity = site.capacity;

@@ -1,7 +1,7 @@
 import { Status } from '../../enums';
 
 export interface ReservationDto {
-   id?: string;
+   id: string;
    partnerId: string;
    workoutScheduleId: string;
    date: Date;

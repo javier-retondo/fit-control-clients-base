@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { BloodGroup } from '../../enums';
 import { MedicalRecordDto } from './medical-record.dto';
 
@@ -15,7 +14,7 @@ export class MedicalRecord {
    private updatedAt: Date;
 
    private constructor(medicalRecord: MedicalRecordDto) {
-      this.id = medicalRecord.id || uuid();
+      this.id = medicalRecord.id;
       this.partnerId = medicalRecord.partnerId;
       this.bloodGroup = medicalRecord.bloodGroup;
       this.allergies = medicalRecord.allergies;

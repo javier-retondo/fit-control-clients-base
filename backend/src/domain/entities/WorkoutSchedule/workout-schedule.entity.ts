@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { WorkoutScheduleDto } from './workout-schedule.dto';
 import { WeekDay } from '../../enums';
 
@@ -12,7 +11,7 @@ export class WorkoutSchedule {
    private headquarterId: string;
 
    private constructor(workoutSchedule: WorkoutScheduleDto) {
-      this.id = workoutSchedule.id || uuid();
+      this.id = workoutSchedule.id;
       this.partnerId = workoutSchedule.partnerId;
       this.instructorId = workoutSchedule.instructorId;
       this.weekDay = workoutSchedule.weekDay;

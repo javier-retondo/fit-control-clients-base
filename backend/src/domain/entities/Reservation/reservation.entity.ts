@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { Status } from '../../enums';
 import { ReservationDto } from './reservation.dto';
 
@@ -10,11 +9,11 @@ export class Reservation {
    private status: Status;
 
    private constructor(reservation: ReservationDto, status: Status) {
-      this.id = reservation.id || uuid();
+      this.id = reservation.id;
       this.partnerId = reservation.partnerId;
       this.workoutScheduleId = reservation.workoutScheduleId;
       this.date = new Date(reservation.date);
-      this.status = reservation.status;
+      this.status = status;
    }
 
    static create(reservation: ReservationDto): Reservation {

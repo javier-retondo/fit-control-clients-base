@@ -1,9 +1,12 @@
 import { Roles } from '../../enums';
+import { MedicalRecordDto } from '../MedicalRecord';
+import { ReservationDto } from '../Reservation';
 import { RutineDto } from '../Rutine';
 import { SubscriptionDto } from '../Subscription';
+import { WorkoutScheduleDto } from '../WorkoutSchedule';
 
 export interface UserDto {
-   id?: string;
+   id: string;
    name: string;
    lastName: string;
    email: string;
@@ -14,7 +17,9 @@ export interface UserDto {
 
    rutines?: RutineDto[];
    suscriptions?: SubscriptionDto[];
-   medicalRecord?: any;
-   workoutReservations?: any;
-   workout?: any;
+   medicalRecord?: MedicalRecordDto;
+   workoutReservations?: ReservationDto[];
+
+   // Instructor related
+   workouts?: WorkoutScheduleDto[];
 }

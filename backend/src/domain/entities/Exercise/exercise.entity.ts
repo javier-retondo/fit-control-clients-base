@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { ExerciseDto } from './exercise.dto';
 
 export class Exercise {
@@ -12,7 +11,7 @@ export class Exercise {
    private video_url?: string;
 
    private constructor(exercise: ExerciseDto) {
-      this.id = exercise.id || uuid();
+      this.id = exercise.id;
       this.rutineId = exercise.rutineId;
       this.name = exercise.name;
       this.description = exercise.description;

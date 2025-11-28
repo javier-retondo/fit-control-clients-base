@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { PaymentMethod, Status } from '../../enums';
 import { PaymentDto } from './payment.dto';
 import { Amount } from './value-objects';
@@ -14,7 +13,7 @@ export class Payment {
 
    private constructor(payment: PaymentDto, status: Status) {
       const amountValue = Amount.create(payment.amount);
-      this.id = payment.id || uuid();
+      this.id = payment.id;
       this.subscriptionId = payment.subscriptionId;
       this.amount = amountValue.getValue();
       this.status = status;

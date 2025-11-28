@@ -1,5 +1,5 @@
 export interface ExerciseDto {
-   id?: string;
+   id: string;
    rutineId: string;
    name: string;
    description: string;

@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { PlanType, Status } from '../../enums';
 import { PlanDto } from './plan.dto';
 import { Dates, Amount } from './value-objects';
@@ -18,7 +17,7 @@ export class Plan {
    private constructor(plan: PlanDto, status: Status) {
       const amountValue = Amount.create(plan.amount);
       const dates = Dates.create(plan.startDate, plan.endDate);
-      this.id = plan.id || uuid();
+      this.id = plan.id;
       this.name = plan.name;
       this.description = plan.description;
       this.startDate = dates.getStartDate();

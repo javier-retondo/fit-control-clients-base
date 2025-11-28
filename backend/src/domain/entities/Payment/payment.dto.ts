@@ -1,7 +1,7 @@
 import { PaymentMethod, Status } from '../../enums';
 
 export interface PaymentDto {
-   id?: string;
+   id: string;
    subscriptionId: string;
    amount: number;
    status: Status;

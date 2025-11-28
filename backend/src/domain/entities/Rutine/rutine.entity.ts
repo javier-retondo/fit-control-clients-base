@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { WeekDay, Status } from '../../enums';
 import { RutineDto } from './rutine.dto';
 import { Exercise } from '../Exercise/exercise.entity';
@@ -16,8 +15,8 @@ export class Rutine {
    private updatedAt: Date;
    private exercises: Exercise[];
 
-   private constructor(rutine: RutineDto, status: Status) {
-      this.id = rutine.id || uuid();
+   private constructor(rutine: Omit<RutineDto, 'role'>, status: Status) {
+      this.id = rutine.id;
       this.partnerId = rutine.partnerId;
       this.instructorId = rutine.instructorId;
       this.weekDay = rutine.weekDay;
@@ -30,7 +29,7 @@ export class Rutine {
       this.updatedAt = rutine.updatedAt || new Date();
    }
 
-   static create(rutine: Omit<RutineDto, 'id' | 'createdAt' | 'updatedAt'>): Rutine {
+   static create(rutine: Omit<RutineDto, 'createdAt' | 'updatedAt'>): Rutine {
       return new Rutine(rutine, Status.ACTIVE);
    }
 

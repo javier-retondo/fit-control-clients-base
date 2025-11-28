@@ -1,7 +1,7 @@
 import { BloodGroup } from '../../enums';
 
 export interface MedicalRecordDto {
-   id?: string;
+   id: string;
    partnerId: string;
    bloodGroup: BloodGroup;
    allergies: string;

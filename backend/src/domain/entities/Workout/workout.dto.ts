@@ -2,7 +2,7 @@ import { WorkoutType } from '../../enums/workout-type.enum';
 import { HeadquarterScheduleDTO } from '../HeadquarterSchedule';
 
 export interface WorkoutDto {
-   id?: string;
+   id: string;
    type: WorkoutType;
    name: string;
    description: string;

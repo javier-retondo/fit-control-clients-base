@@ -1,7 +1,7 @@
 import { Status } from '../../enums';
 
 export interface SubscriptionDto {
-   id?: string;
+   id: string;
    partnerId: string;
    planId: string;
    startDate: Date;

@@ -2,7 +2,7 @@ import { WeekDay } from '../../enums';
 import { HeadquarterDto } from '../Headquarter/headquarter.dto';
 
 export interface HeadquarterScheduleDTO {
-   id?: string;
+   id: string;
    headquarter: HeadquarterDto;
    startHour: Date;
    endHour: Date;
