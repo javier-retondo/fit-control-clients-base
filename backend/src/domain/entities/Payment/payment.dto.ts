@@ -1,11 +1,12 @@
 import { PaymentMethod, Status } from '../../enums';
+import { SubscriptionDto } from '../Subscription';
+import { UserDto } from '../User';
 
 export interface PaymentDto {
    id: string;
-   subscriptionId: string;
    amount: number;
-   status: Status;
    paymentMethod: PaymentMethod;
+   partner: UserDto;
+   subscription: SubscriptionDto;
    createdAt?: Date;
-   updatedAt?: Date;
 }

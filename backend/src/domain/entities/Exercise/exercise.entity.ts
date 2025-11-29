@@ -10,18 +10,16 @@ export class Exercise {
    private repetitions?: number;
    private video_url?: string;
 
-   private constructor(exercise: ExerciseDto) {
+   private constructor(exercise: Omit<ExerciseDto, 'duration' | 'repetitions'>) {
       this.id = exercise.id;
       this.rutineId = exercise.rutineId;
       this.name = exercise.name;
       this.description = exercise.description;
       this.series = exercise.series;
-      this.duration = exercise.duration;
-      this.repetitions = exercise.repetitions;
       this.video_url = exercise.video_url;
    }
 
-   static create(exercise: ExerciseDto): Exercise {
+   static create(exercise: Omit<ExerciseDto, 'duration' | 'repetitions'>): Exercise {
       return new Exercise(exercise);
    }
 
@@ -42,7 +40,38 @@ export class Exercise {
       };
    }
 
+   setDuration(duration: number): void {
+      if (duration <= 0) {
+         throw new Error('Duration must be a positive number');
+      }
+      if (this.repetitions) {
+         throw new Error('Cannot set duration when repetitions is already set');
+      }
+      this.duration = duration;
+   }
+
+   setRepetitions(repetitions: number): void {
+      if (repetitions <= 0) {
+         throw new Error('Repetitions must be a positive number');
+      }
+      if (this.duration) {
+         throw new Error('Cannot set repetitions when duration is already set');
+      }
+      this.repetitions = repetitions;
+   }
+
    setVideoUrl(url: string): void {
       this.video_url = url;
+   }
+
+   checkHasDurationOrRepetitions(): void {
+      if (!this.duration && !this.repetitions) {
+         throw new Error('Exercise must have either duration or repetitions set');
+      }
+   }
+
+   clearSettings(): void {
+      this.duration = undefined;
+      this.repetitions = undefined;
    }
 }

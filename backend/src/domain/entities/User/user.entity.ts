@@ -1,4 +1,4 @@
-import { Roles } from '../../enums';
+import { Roles, Status } from '../../enums';
 import { UserDto } from './user.dto';
 import { Rutine } from '../Rutine/rutine.entity';
 import { Subscription } from '../Subscription/subscription.entity';
@@ -17,6 +17,7 @@ export class User {
    private isPasswordHashed: boolean = false;
    private isSuperUser: boolean = false;
    private role: Roles;
+   private status: Status;
 
    // Partners features
    private rutines?: Rutine[];
@@ -36,12 +37,14 @@ export class User {
       this.password = user.password;
       this.isTemporaryPassword = user.isTemporaryPassword;
       this.role = user.role;
+      this.status = user.status;
    }
 
-   static create(user: Omit<UserDto, 'role'>, role: Roles): User {
+   static create(user: Omit<UserDto, 'role' | 'status'>, role: Roles): User {
       return new User({
          ...user,
          role,
+         status: Status.ACTIVE,
       });
    }
 
@@ -94,6 +97,7 @@ export class User {
          user: this.user,
          isTemporaryPassword: this.isTemporaryPassword,
          role: this.role,
+         status: this.status,
       };
    }
 }

@@ -1,4 +1,4 @@
-import { User, UserDto, UserRepository } from '../../../../domain';
+import { Roles, User, UserDto, UserRepository } from '../../../../domain';
 import {
    IdGenerator,
    INotificationService,
@@ -6,10 +6,11 @@ import {
    PasswordHashService,
    UseCaseCommandInterface,
 } from '../../../interfaces';
+import { registerPartnerRequest } from './request.dto';
 
-import { CreateUserRequest } from './request.dto';
-
-export class CreateAdminUserHandler implements UseCaseCommandInterface<CreateUserRequest, UserDto> {
+export class RegisterPartnerHandler
+   implements UseCaseCommandInterface<registerPartnerRequest, UserDto>
+{
    constructor(
       private readonly userRepository: UserRepository,
       private readonly notificationService: INotificationService,
@@ -18,8 +19,8 @@ export class CreateAdminUserHandler implements UseCaseCommandInterface<CreateUse
       private readonly passwordGenerator: IPasswordRandomGeneratorService,
    ) {}
 
-   async execute(request: CreateUserRequest): Promise<UserDto> {
-      const { name, lastName, email, user, role } = request;
+   async execute(request: registerPartnerRequest): Promise<UserDto> {
+      const { name, lastName, email, user } = request;
 
       const newUser = User.create(
          {
@@ -33,7 +34,7 @@ export class CreateAdminUserHandler implements UseCaseCommandInterface<CreateUse
             ),
             isTemporaryPassword: true,
          },
-         role,
+         Roles.PARTNER,
       );
 
       const createdUser = await this.userRepository.save(newUser);
@@ -41,8 +42,7 @@ export class CreateAdminUserHandler implements UseCaseCommandInterface<CreateUse
          createdUser.get(),
          createdUser.getTemporaryPassword(),
          `Bienvenido a FitControl`,
-         `Hola ${createdUser.get().name}, su usuario ha sido creado exitosamente. Su contraseña temporal es: ${createdUser.getTemporaryPassword()}. Por favor, cambie su contraseña en el primer inicio de sesión.
-         Su rol asignado es: ${role}.`,
+         `Hola ${createdUser.get().name}, su usuario ha sido creado exitosamente. Su contraseña temporal es: ${createdUser.getTemporaryPassword()}. Por favor, cambie su contraseña en el primer inicio de sesión.`,
       );
 
       return createdUser.get();

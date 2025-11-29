@@ -1,56 +1,43 @@
-import { PaymentMethod, Status } from '../../enums';
+import { PaymentMethod } from '../../enums';
+import { Subscription } from '../Subscription';
+import { User } from '../User';
 import { PaymentDto } from './payment.dto';
 import { Amount } from './value-objects';
 
 export class Payment {
    private id: string;
-   private subscriptionId: string;
+   private subscription: Subscription;
    private amount: number;
-   private status: Status;
    private paymentMethod: PaymentMethod;
+   private partner: User;
    private createdAt: Date;
-   private updatedAt: Date;
 
-   private constructor(payment: PaymentDto, status: Status) {
+   private constructor(payment: PaymentDto) {
       const amountValue = Amount.create(payment.amount);
       this.id = payment.id;
-      this.subscriptionId = payment.subscriptionId;
+      this.subscription = Subscription.rebuild(payment.subscription);
       this.amount = amountValue.getValue();
-      this.status = status;
       this.paymentMethod = payment.paymentMethod;
       this.createdAt = payment.createdAt || new Date();
-      this.updatedAt = payment.updatedAt || new Date();
+      this.partner = User.rebuild(payment.partner);
    }
 
    static create(payment: PaymentDto): Payment {
-      return new Payment(payment, Status.PENDING);
+      return new Payment(payment);
    }
 
    static rebuild(payment: PaymentDto): Payment {
-      return new Payment(payment, payment.status);
-   }
-
-   accepted(): void {
-      this.status = Status.ACCEPTED;
-   }
-
-   failed(): void {
-      this.status = Status.FAILED;
-   }
-
-   rejected(): void {
-      this.status = Status.REJECTED;
+      return new Payment(payment);
    }
 
    get(): PaymentDto {
       return {
          id: this.id,
-         subscriptionId: this.subscriptionId,
+         subscription: this.subscription.get(),
          amount: this.amount,
-         status: this.status,
          paymentMethod: this.paymentMethod,
+         partner: this.partner.get(),
          createdAt: this.createdAt,
-         updatedAt: this.updatedAt,
       };
    }
 }

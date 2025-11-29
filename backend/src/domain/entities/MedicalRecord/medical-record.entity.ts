@@ -26,8 +26,12 @@ export class MedicalRecord {
       this.updatedAt = medicalRecord.updatedAt || new Date();
    }
 
-   static create(medicalRecord: MedicalRecordDto): MedicalRecord {
-      return new MedicalRecord(medicalRecord);
+   static create(medicalRecord: Omit<MedicalRecordDto, 'createdAt' | 'updatedAt'>): MedicalRecord {
+      return new MedicalRecord({
+         ...medicalRecord,
+         createdAt: new Date(),
+         updatedAt: new Date(),
+      });
    }
 
    static rebuild(medicalRecord: MedicalRecordDto): MedicalRecord {

@@ -1,34 +1,40 @@
 import { Status } from '../../enums';
+import { Plan } from '../Plan';
+import { User } from '../User';
 import { SubscriptionDto } from './subscription.dto';
 import { Dates, Amount } from './value-objects';
 
 export class Subscription {
    private id: string;
-   private partnerId: string;
-   private planId: string;
+   private partner: User;
+   private plan: Plan;
    private startDate: Date;
    private endDate: Date;
    private amount: number;
    private status: Status;
 
-   private constructor(subscription: SubscriptionDto, status: Status) {
+   private constructor(subscription: SubscriptionDto) {
       const amountValue = Amount.create(subscription.amount);
       const dates = Dates.create(subscription.startDate, subscription.endDate);
       this.id = subscription.id;
-      this.partnerId = subscription.partnerId;
-      this.planId = subscription.planId;
+      this.partner = User.rebuild(subscription.partner);
+      this.plan = Plan.rebuild(subscription.plan);
       this.startDate = dates.getStartDate();
       this.endDate = dates.getEndDate();
       this.amount = amountValue.getValue();
-      this.status = status;
+      this.status = subscription.status;
    }
 
-   static create(subscription: SubscriptionDto): Subscription {
-      return new Subscription(subscription, Status.ACTIVE);
+   static create(subscription: Omit<SubscriptionDto, 'status'>): Subscription {
+      return new Subscription({
+         ...subscription,
+         startDate: new Date(),
+         status: Status.ACTIVE,
+      });
    }
 
    static rebuild(subscription: SubscriptionDto): Subscription {
-      return new Subscription(subscription, subscription.status);
+      return new Subscription(subscription);
    }
 
    inactiveSubscription(): void {
@@ -44,8 +50,8 @@ export class Subscription {
    get(): SubscriptionDto {
       return {
          id: this.id,
-         partnerId: this.partnerId,
-         planId: this.planId,
+         partner: this.partner.get(),
+         plan: this.plan.get(),
          startDate: this.startDate,
          endDate: this.endDate,
          amount: this.amount,

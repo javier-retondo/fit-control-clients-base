@@ -10,7 +10,7 @@ export class Headquarter {
    private status: Status;
    private imageUrl?: string;
 
-   private constructor(site: HeadquarterDto, status: Status) {
+   private constructor(site: Omit<HeadquarterDto, 'status'>, status: Status) {
       this.id = site.id;
       this.name = site.name;
       this.location = site.location;
@@ -20,7 +20,7 @@ export class Headquarter {
       this.imageUrl = site.imageUrl;
    }
 
-   static create(site: HeadquarterDto): Headquarter {
+   static create(site: Omit<HeadquarterDto, 'status'>): Headquarter {
       return new Headquarter(site, Status.ACTIVE);
    }
 
