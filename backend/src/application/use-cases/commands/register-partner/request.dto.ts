@@ -3,5 +3,6 @@ export interface registerPartnerRequest {
    lastName: string;
    email: string;
    user: string;
+   dni: string;
    suscriptionId: string;
 }

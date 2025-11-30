@@ -3,6 +3,7 @@ import { WeekDay } from '../../enums';
 import { Headquarter } from '../Headquarter';
 import { User } from '../User';
 import { Workout } from '../Workout/workout.entity';
+import { Reservation } from '../Reservation';
 
 export class WorkoutSchedule {
    private id: string;
@@ -12,6 +13,7 @@ export class WorkoutSchedule {
    private endTime: Date;
    private headquarter: Headquarter;
    private workout: Workout;
+   private reservations?: Reservation[];
 
    private constructor(workoutSchedule: WorkoutScheduleDto) {
       this.id = workoutSchedule.id;
@@ -21,6 +23,11 @@ export class WorkoutSchedule {
       this.endTime = new Date(workoutSchedule.endTime);
       this.headquarter = Headquarter.rebuild(workoutSchedule.headquarter);
       this.workout = Workout.rebuild(workoutSchedule.workout);
+      if (workoutSchedule.reservations) {
+         this.reservations = workoutSchedule.reservations.map((reservation) =>
+            Reservation.rebuild(reservation),
+         );
+      }
    }
 
    static create(workoutSchedule: WorkoutScheduleDto): WorkoutSchedule {
@@ -40,6 +47,9 @@ export class WorkoutSchedule {
          endTime: this.endTime,
          headquarter: this.headquarter.get(),
          workout: this.workout.get(),
+         reservations: this.reservations
+            ? this.reservations.map((reservation) => reservation.get())
+            : undefined,
       };
    }
 
@@ -50,5 +60,10 @@ export class WorkoutSchedule {
       this.endTime = new Date(workoutSchedule.endTime);
       this.headquarter = Headquarter.rebuild(workoutSchedule.headquarter);
       this.workout = Workout.rebuild(workoutSchedule.workout);
+      if (workoutSchedule.reservations) {
+         this.reservations = workoutSchedule.reservations.map((reservation) =>
+            Reservation.rebuild(reservation),
+         );
+      }
    }
 }

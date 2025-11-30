@@ -1,8 +1,9 @@
+import { Rutine } from '../Rutine';
 import { ExerciseDto } from './exercise.dto';
 
 export class Exercise {
    private id: string;
-   private rutineId: string;
+   private rutine: Rutine;
    private name: string;
    private description: string;
    private series: number;
@@ -12,7 +13,7 @@ export class Exercise {
 
    private constructor(exercise: Omit<ExerciseDto, 'duration' | 'repetitions'>) {
       this.id = exercise.id;
-      this.rutineId = exercise.rutineId;
+      this.rutine = Rutine.rebuild(exercise.rutine);
       this.name = exercise.name;
       this.description = exercise.description;
       this.series = exercise.series;
@@ -30,7 +31,7 @@ export class Exercise {
    get(): ExerciseDto {
       return {
          id: this.id,
-         rutineId: this.rutineId,
+         rutine: this.rutine.get(),
          name: this.name,
          description: this.description,
          series: this.series,

@@ -1,10 +1,12 @@
+import { RutineDto } from '../Rutine';
+
 export interface ExerciseDto {
    id: string;
-   rutineId: string;
+   rutine: RutineDto;
    name: string;
    description: string;
    series: number;
-   duration?: number; // Segundos
+   duration?: number;
    repetitions?: number;
    video_url?: string;
 }

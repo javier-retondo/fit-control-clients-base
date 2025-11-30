@@ -12,6 +12,7 @@ export class User {
    private lastName: string;
    private email: string;
    private user: string;
+   private dni?: string;
    private password?: string;
    private isTemporaryPassword?: boolean;
    private isPasswordHashed: boolean = false;
@@ -38,6 +39,7 @@ export class User {
       this.isTemporaryPassword = user.isTemporaryPassword;
       this.role = user.role;
       this.status = user.status;
+      this.dni = user.dni;
    }
 
    static create(user: Omit<UserDto, 'role' | 'status'>, role: Roles): User {
@@ -105,6 +107,7 @@ export class User {
          isTemporaryPassword: this.isTemporaryPassword,
          role: this.role,
          status: this.status,
+         dni: this.dni,
       };
    }
 }

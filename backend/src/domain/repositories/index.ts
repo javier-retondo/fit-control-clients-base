@@ -2,8 +2,6 @@ export * from './exercise.repository';
 export * from './headquarter-schedule.repository';
 export * from './headquarter.repository';
 export * from './medical-record.repository';
-export * from './message.repository';
-export * from './notification.repository';
 export * from './payment.repository';
 export * from './plan.repository';
 export * from './reservation.repository';

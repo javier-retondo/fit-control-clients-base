@@ -1,5 +1,6 @@
 import { WeekDay } from '../../enums';
 import { HeadquarterDto } from '../Headquarter';
+import { ReservationDto } from '../Reservation';
 import { UserDto } from '../User';
 import { WorkoutDto } from '../Workout/workout.dto';
 
@@ -11,4 +12,5 @@ export interface WorkoutScheduleDto {
    endTime: Date;
    headquarter: HeadquarterDto;
    workout: WorkoutDto;
+   reservations?: ReservationDto[];
 }

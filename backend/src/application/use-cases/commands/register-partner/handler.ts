@@ -20,7 +20,7 @@ export class RegisterPartnerHandler
    ) {}
 
    async execute(request: registerPartnerRequest): Promise<UserDto> {
-      const { name, lastName, email, user } = request;
+      const { name, lastName, email, user, dni } = request;
 
       const newUser = User.create(
          {
@@ -29,6 +29,7 @@ export class RegisterPartnerHandler
             lastName,
             email,
             user,
+            dni,
             password: await this.passwordHashService.hash(
                this.passwordGenerator.generate(12, true, true, true, false),
             ),

@@ -16,6 +16,9 @@
       "allowSyntheticDefaultImports": true,
       "moduleResolution": "node"
    },
-   "include": ["src/**/*.ts"],
+   "include": [
+      "src/**/*.ts",
+      "src/infrastructure/database/type-orm/entities/headquarter-schedule.entity.tsts"
+   ],
    "exclude": ["node_modules"]
 }

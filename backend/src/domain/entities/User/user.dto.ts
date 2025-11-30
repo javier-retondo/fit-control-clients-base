@@ -11,6 +11,7 @@ export interface UserDto {
    lastName: string;
    email: string;
    user: string;
+   dni?: string;
    password?: string;
    isTemporaryPassword?: boolean;
    role: Roles;
