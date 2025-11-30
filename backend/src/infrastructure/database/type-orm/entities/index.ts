@@ -5,7 +5,7 @@ export * from './medical-record.entity';
 export * from './payment.entity';
 export * from './plan.entity';
 export * from './reservation.entity';
-export * from './rutine.entity';
+export * from './routine.entity';
 export * from './subscription.entity';
 export * from './user.entity';
 export * from './workout-schedule.entity';

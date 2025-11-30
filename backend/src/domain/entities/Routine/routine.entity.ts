@@ -1,8 +1,8 @@
 import { WeekDay, Status } from '../../enums';
-import { RutineDto } from './rutine.dto';
+import { RoutineDto } from './routine.dto';
 import { Exercise } from '../Exercise/exercise.entity';
 
-export class Rutine {
+export class Routine {
    private id: string;
    private partnerId: string;
    private instructorId: string;
@@ -15,26 +15,26 @@ export class Rutine {
    private updatedAt: Date;
    private exercises: Exercise[];
 
-   private constructor(rutine: Omit<RutineDto, 'role'>, status: Status) {
-      this.id = rutine.id;
-      this.partnerId = rutine.partnerId;
-      this.instructorId = rutine.instructorId;
-      this.weekDay = rutine.weekDay;
-      this.name = rutine.name;
-      this.objective = rutine.objective;
-      this.description = rutine.description;
+   private constructor(routine: Omit<RoutineDto, 'role'>, status: Status) {
+      this.id = routine.id;
+      this.partnerId = routine.partnerId;
+      this.instructorId = routine.instructorId;
+      this.weekDay = routine.weekDay;
+      this.name = routine.name;
+      this.objective = routine.objective;
+      this.description = routine.description;
       this.status = status;
       this.exercises = [];
-      this.createdAt = rutine.createdAt || new Date();
-      this.updatedAt = rutine.updatedAt || new Date();
+      this.createdAt = routine.createdAt || new Date();
+      this.updatedAt = routine.updatedAt || new Date();
    }
 
-   static create(rutine: Omit<RutineDto, 'createdAt' | 'updatedAt'>): Rutine {
-      return new Rutine(rutine, Status.ACTIVE);
+   static create(routine: Omit<RoutineDto, 'createdAt' | 'updatedAt'>): Routine {
+      return new Routine(routine, Status.ACTIVE);
    }
 
-   static rebuild(rutine: RutineDto): Rutine {
-      return new Rutine(rutine, rutine.status);
+   static rebuild(routine: RoutineDto): Routine {
+      return new Routine(routine, routine.status);
    }
 
    addExercise(exercise: Exercise): void {
@@ -53,7 +53,7 @@ export class Rutine {
       this.status = Status.ACTIVE;
    }
 
-   get(): RutineDto {
+   get(): RoutineDto {
       return {
          id: this.id,
          partnerId: this.partnerId,
@@ -70,13 +70,13 @@ export class Rutine {
    }
 
    update(
-      rutine: Pick<RutineDto, 'instructorId' | 'name' | 'objective' | 'description' | 'weekDay'>,
+      routine: Pick<RoutineDto, 'instructorId' | 'name' | 'objective' | 'description' | 'weekDay'>,
    ): void {
-      this.instructorId = rutine.instructorId ? rutine.instructorId : this.instructorId;
-      this.weekDay = rutine.weekDay ? rutine.weekDay : this.weekDay;
-      this.name = rutine.name ? rutine.name : this.name;
-      this.objective = rutine.objective ? rutine.objective : this.objective;
-      this.description = rutine.description ? rutine.description : this.description;
+      this.instructorId = routine.instructorId ? routine.instructorId : this.instructorId;
+      this.weekDay = routine.weekDay ? routine.weekDay : this.weekDay;
+      this.name = routine.name ? routine.name : this.name;
+      this.objective = routine.objective ? routine.objective : this.objective;
+      this.description = routine.description ? routine.description : this.description;
       this.updatedAt = new Date();
    }
 }

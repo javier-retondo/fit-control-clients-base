@@ -5,7 +5,7 @@ export * from './MedicalRecord';
 export * from './Payment';
 export * from './Plan';
 export * from './Reservation';
-export * from './Rutine';
+export * from './Routine';
 export * from './Subscription';
 export * from './User';
 export * from './Workout';

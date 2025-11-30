@@ -1,6 +1,6 @@
 import { Roles, Status } from '../../enums';
 import { UserDto } from './user.dto';
-import { Rutine } from '../Rutine/rutine.entity';
+import { Routine } from '../Routine/routine.entity';
 import { Subscription } from '../Subscription/subscription.entity';
 import { MedicalRecord } from '../MedicalRecord/medical-record.entity';
 import { Reservation, ReservationDto } from '../Reservation';
@@ -21,7 +21,7 @@ export class User {
    private status: Status;
 
    // Partners features
-   private rutines?: Rutine[];
+   private routines?: Routine[];
    private suscriptions?: Subscription[];
    private medicalRecord?: MedicalRecord;
    private workoutReservations?: Reservation[];

@@ -5,7 +5,7 @@ export * from './medical-record.repository.interface';
 export * from './payment.repository.interface';
 export * from './plan.repository.interface';
 export * from './reservation.repository.interface';
-export * from './rutine.repository.interface';
+export * from './routine.repository.interface';
 export * from './subscription.repository.interface';
 export * from './user.repository.interface';
 export * from './workout-schedule.repository.interface';

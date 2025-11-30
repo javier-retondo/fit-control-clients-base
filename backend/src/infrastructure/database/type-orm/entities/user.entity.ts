@@ -3,7 +3,7 @@ import { SubscriptionEntity } from './subscription.entity';
 import { MedicalRecordEntity } from './medical-record.entity';
 import { WorkoutScheduleEntity } from './workout-schedule.entity';
 import { Roles, Status } from '../../../../domain';
-import { RoutineEntity } from './rutine.entity';
+import { RoutineEntity } from './routine.entity';
 import { ReservationEntity } from './reservation.entity';
 
 @Entity({ name: 'user' })
@@ -39,7 +39,7 @@ export class UserEntity {
    status!: Status;
 
    @OneToMany(() => RoutineEntity, (routine) => routine.instructorId)
-   rutines?: RoutineEntity[];
+   routines?: RoutineEntity[];
 
    @OneToOne(() => SubscriptionEntity, (subscription) => subscription.partner, {
       onDelete: 'SET NULL',

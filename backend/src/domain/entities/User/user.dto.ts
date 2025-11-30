@@ -1,7 +1,7 @@
 import { Roles, Status } from '../../enums';
 import { MedicalRecordDto } from '../MedicalRecord';
 import { ReservationDto } from '../Reservation';
-import { RutineDto } from '../Rutine';
+import { RoutineDto } from '../Routine';
 import { SubscriptionDto } from '../Subscription';
 import { WorkoutScheduleDto } from '../WorkoutSchedule';
 
@@ -17,7 +17,7 @@ export interface UserDto {
    role: Roles;
    status: Status;
 
-   rutines?: RutineDto[];
+   routines?: RoutineDto[];
    suscription?: SubscriptionDto;
    medicalRecord?: MedicalRecordDto;
    workoutReservations?: ReservationDto[];

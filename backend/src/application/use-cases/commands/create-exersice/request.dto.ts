@@ -1,5 +1,5 @@
 export interface CreateExerciseRequest {
-   rutineId: string;
+   routineId: string;
    name: string;
    description: string;
    series: number;

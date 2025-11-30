@@ -1,4 +1,4 @@
-import { Exercise, ExerciseDto, IExerciseRepository, IRutineRepository } from '../../../../domain';
+import { Exercise, ExerciseDto, IExerciseRepository, IRoutineRepository } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { CreateExerciseRequest } from './request.dto';
 
@@ -8,21 +8,21 @@ export class CreateExersiceHandler
    constructor(
       private readonly idGenerator: IdGenerator,
       private readonly exerciseRepository: IExerciseRepository,
-      private readonly rutineRepository: IRutineRepository,
+      private readonly routineRepository: IRoutineRepository,
    ) {}
 
    async execute(request: CreateExerciseRequest): Promise<ExerciseDto> {
-      const { rutineId, name, description, series, duration, repetitions, video_url, type } =
+      const { routineId, name, description, series, duration, repetitions, video_url, type } =
          request;
 
-      const rutine = await this.rutineRepository.findById(rutineId);
-      if (!rutine) {
-         throw new Error('Rutine not found');
+      const routine = await this.routineRepository.findById(routineId);
+      if (!routine) {
+         throw new Error('Routine not found');
       }
 
       const newExercise = Exercise.create({
          id: this.idGenerator.generate(),
-         rutine: rutine.get(),
+         routine: routine.get(),
          name,
          description,
          series,

@@ -1,8 +1,8 @@
-import { RutineDto } from '../Rutine';
+import { RoutineDto } from '../Routine';
 
 export interface ExerciseDto {
    id: string;
-   rutine: RutineDto;
+   routine: RoutineDto;
    name: string;
    description: string;
    series: number;
