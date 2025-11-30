@@ -88,6 +88,13 @@ export class User {
       throw new Error('User does not have a temporary password');
    }
 
+   getHashedPassword(): string {
+      if (this.isPasswordHashed && this.password) {
+         return this.password;
+      }
+      throw new Error('Password is not hashed');
+   }
+
    get(): Omit<UserDto, 'password'> {
       return {
          id: this.id,

@@ -1,22 +1,39 @@
-import { Payment, PaymentDto, PaymentRepository } from '../../../../domain';
+import {
+   Payment,
+   PaymentDto,
+   PaymentRepository,
+   SubscriptionRepository,
+   UserRepository,
+} from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
+import { RegisterPaymentRequest } from './request.dto';
 
-export class RegisterPaymentRequest
+export class RegisterPaymentHandler
    implements UseCaseCommandInterface<RegisterPaymentRequest, PaymentDto>
 {
    constructor(
       private readonly paymentRepository: PaymentRepository,
+      private readonly userRepository: UserRepository,
+      private readonly subscriptionRepository: SubscriptionRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
    async execute(request: RegisterPaymentRequest): Promise<PaymentDto> {
       const { partnerId, subscriptionId, amount, date, method } = request;
+      const partner = await this.userRepository.findById(partnerId);
+      if (!partner) {
+         throw new Error('Partner not found');
+      }
+      const subscription = await this.subscriptionRepository.findById(subscriptionId);
+      if (!subscription) {
+         throw new Error('Subscription not found');
+      }
       const newPayment = Payment.create({
          id: this.idGenerator.generate(),
-         partnerId,
-         subscriptionId,
+         partner: partner.get(),
+         subscription: subscription.get(),
          amount,
-         date,
-         method,
+         createdAt: date,
+         paymentMethod: method,
       });
       const createdPayment = await this.paymentRepository.save(newPayment);
       return createdPayment.get();
