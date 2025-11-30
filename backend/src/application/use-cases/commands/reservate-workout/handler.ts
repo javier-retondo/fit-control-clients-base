@@ -1,9 +1,9 @@
 import {
    Reservation,
    ReservationDto,
-   ReservationRepository,
-   UserRepository,
-   WorkoutScheduleRepository,
+   IReservationRepository,
+   IUserRepository,
+   IWorkoutScheduleRepository,
 } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { ReservateWorkoutRequest } from './request.dto';
@@ -12,9 +12,9 @@ export class ReservateWorkoutHandler
    implements UseCaseCommandInterface<ReservateWorkoutRequest, ReservationDto>
 {
    constructor(
-      private readonly userRepository: UserRepository,
-      private readonly workoutScheduleRepository: WorkoutScheduleRepository,
-      private readonly reservationRepository: ReservationRepository,
+      private readonly userRepository: IUserRepository,
+      private readonly workoutScheduleRepository: IWorkoutScheduleRepository,
+      private readonly reservationRepository: IReservationRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
    async execute(request: ReservateWorkoutRequest): Promise<ReservationDto> {

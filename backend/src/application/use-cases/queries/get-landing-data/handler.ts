@@ -1,17 +1,17 @@
 import {
-   HeadquarterScheduleRepository,
-   PlanRepository,
+   IHeadquarterScheduleRepository,
+   IPlanRepository,
    Status,
-   WorkoutRepository,
+   IWorkoutRepository,
 } from '../../../../domain';
 import { UseCaseQuery, IGymConfiguration } from '../../../interfaces';
 import { GetLandingDataResponse } from './response.dto';
 
 export class GetLandingDataHandler implements UseCaseQuery<undefined, GetLandingDataResponse> {
    constructor(
-      private readonly workoutRepository: WorkoutRepository,
-      private readonly headquarterScheduleRepository: HeadquarterScheduleRepository,
-      private readonly plansRepository: PlanRepository,
+      private readonly workoutRepository: IWorkoutRepository,
+      private readonly headquarterScheduleRepository: IHeadquarterScheduleRepository,
+      private readonly plansRepository: IPlanRepository,
       private readonly baseConfig: IGymConfiguration,
    ) {}
    async execute(): Promise<GetLandingDataResponse> {

@@ -2,8 +2,6 @@ export * from './Exercise';
 export * from './Headquarter';
 export * from './HeadquarterSchedule';
 export * from './MedicalRecord';
-export * from './Message';
-export * from './Notification';
 export * from './Payment';
 export * from './Plan';
 export * from './Reservation';

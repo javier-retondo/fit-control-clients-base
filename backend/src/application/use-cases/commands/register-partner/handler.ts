@@ -1,4 +1,4 @@
-import { Roles, User, UserDto, UserRepository } from '../../../../domain';
+import { Roles, User, UserDto, IUserRepository } from '../../../../domain';
 import {
    IdGenerator,
    INotificationService,
@@ -12,7 +12,7 @@ export class RegisterPartnerHandler
    implements UseCaseCommandInterface<registerPartnerRequest, UserDto>
 {
    constructor(
-      private readonly userRepository: UserRepository,
+      private readonly userRepository: IUserRepository,
       private readonly notificationService: INotificationService,
       private readonly idGenerator: IdGenerator,
       private readonly passwordHashService: PasswordHashService,

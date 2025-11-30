@@ -1,9 +1,9 @@
 import {
    Payment,
    PaymentDto,
-   PaymentRepository,
-   SubscriptionRepository,
-   UserRepository,
+   IPaymentRepository,
+   ISubscriptionRepository,
+   IUserRepository,
 } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { RegisterPaymentRequest } from './request.dto';
@@ -12,9 +12,9 @@ export class RegisterPaymentHandler
    implements UseCaseCommandInterface<RegisterPaymentRequest, PaymentDto>
 {
    constructor(
-      private readonly paymentRepository: PaymentRepository,
-      private readonly userRepository: UserRepository,
-      private readonly subscriptionRepository: SubscriptionRepository,
+      private readonly paymentRepository: IPaymentRepository,
+      private readonly userRepository: IUserRepository,
+      private readonly subscriptionRepository: ISubscriptionRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
    async execute(request: RegisterPaymentRequest): Promise<PaymentDto> {

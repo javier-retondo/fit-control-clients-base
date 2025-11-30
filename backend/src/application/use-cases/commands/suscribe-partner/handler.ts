@@ -1,9 +1,9 @@
 import {
-   PlanRepository,
+   IPlanRepository,
    Subscription,
    SubscriptionDto,
-   SubscriptionRepository,
-   UserRepository,
+   ISubscriptionRepository,
+   IUserRepository,
 } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { SubscribePartnerRequest } from './request.dto';
@@ -12,9 +12,9 @@ export class SubscribePartnerHandler
    implements UseCaseCommandInterface<SubscribePartnerRequest, SubscriptionDto>
 {
    constructor(
-      private readonly subscriptionRepository: SubscriptionRepository,
-      private readonly userRepository: UserRepository,
-      private readonly planRepository: PlanRepository,
+      private readonly subscriptionRepository: ISubscriptionRepository,
+      private readonly userRepository: IUserRepository,
+      private readonly planRepository: IPlanRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
 

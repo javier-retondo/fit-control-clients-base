@@ -1,28 +1,17 @@
-import { UserDto, UserRepository } from '../../../../domain';
+import { IUserRepository } from '../../../../domain';
 import { PasswordHashService, UseCaseCommandInterface } from '../../../interfaces';
 import { TokenService } from '../../../interfaces/token.service.interface';
 import { UserLoginRequest } from './request.dto';
+import { UserLoginResponse } from './response.dto';
 
-export class LoginHandler
-   implements
-      UseCaseCommandInterface<
-         UserLoginRequest,
-         {
-            token: string;
-            user: UserDto;
-         }
-      >
-{
+export class LoginHandler implements UseCaseCommandInterface<UserLoginRequest, UserLoginResponse> {
    constructor(
-      private readonly userRepository: UserRepository,
+      private readonly userRepository: IUserRepository,
       private readonly passwordHashService: PasswordHashService,
       private readonly tokenService: TokenService,
    ) {}
 
-   async execute(request: UserLoginRequest): Promise<{
-      token: string;
-      user: UserDto;
-   }> {
+   async execute(request: UserLoginRequest): Promise<UserLoginResponse> {
       const { email, user, password } = request;
 
       const existingUser =

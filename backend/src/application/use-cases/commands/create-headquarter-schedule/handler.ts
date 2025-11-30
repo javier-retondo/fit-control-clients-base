@@ -1,8 +1,8 @@
 import {
-   HeadquarterRepository,
+   IHeadquarterRepository,
    HeadquarterSchedule,
    HeadquarterScheduleDTO,
-   HeadquarterScheduleRepository,
+   IHeadquarterScheduleRepository,
 } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { CreateHeadquarterScheduleRequest } from './request.dto';
@@ -11,8 +11,8 @@ export class CreateHeadquarterHandler
    implements UseCaseCommandInterface<CreateHeadquarterScheduleRequest, HeadquarterScheduleDTO>
 {
    constructor(
-      private readonly headquarterScheduleRepository: HeadquarterScheduleRepository,
-      private readonly headquarterRepository: HeadquarterRepository,
+      private readonly headquarterScheduleRepository: IHeadquarterScheduleRepository,
+      private readonly headquarterRepository: IHeadquarterRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
 

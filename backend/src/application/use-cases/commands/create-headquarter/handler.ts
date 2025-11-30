@@ -1,4 +1,4 @@
-import { Headquarter, HeadquarterDto, HeadquarterRepository } from '../../../../domain';
+import { Headquarter, HeadquarterDto, IHeadquarterRepository } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { CreateHeadquarterRequest } from './request.dto';
 
@@ -6,7 +6,7 @@ export class CreateHeadquarterHandler
    implements UseCaseCommandInterface<CreateHeadquarterRequest, HeadquarterDto>
 {
    constructor(
-      private readonly headquerterRepository: HeadquarterRepository,
+      private readonly headquerterRepository: IHeadquarterRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
 

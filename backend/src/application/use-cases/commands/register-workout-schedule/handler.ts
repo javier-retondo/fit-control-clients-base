@@ -1,11 +1,11 @@
 import {
-   HeadquarterRepository,
+   IHeadquarterRepository,
    Roles,
-   UserRepository,
-   WorkoutRepository,
+   IUserRepository,
+   IWorkoutRepository,
    WorkoutSchedule,
    WorkoutScheduleDto,
-   WorkoutScheduleRepository,
+   IWorkoutScheduleRepository,
 } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { RegisterWorkoutScheduleRequest } from './request.dto';
@@ -14,10 +14,10 @@ export class RegisterWorkoutScheduleHandler
    implements UseCaseCommandInterface<RegisterWorkoutScheduleRequest, WorkoutScheduleDto[]>
 {
    constructor(
-      private readonly workoutScheduleRepository: WorkoutScheduleRepository,
-      private readonly workoutRepository: WorkoutRepository,
-      private readonly userRepository: UserRepository,
-      private readonly headquarterRepository: HeadquarterRepository,
+      private readonly workoutScheduleRepository: IWorkoutScheduleRepository,
+      private readonly workoutRepository: IWorkoutRepository,
+      private readonly userRepository: IUserRepository,
+      private readonly headquarterRepository: IHeadquarterRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
    async execute(request: RegisterWorkoutScheduleRequest): Promise<WorkoutScheduleDto[]> {

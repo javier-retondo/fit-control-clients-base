@@ -1,9 +1,9 @@
-import { UserRepository } from '../../../../domain';
+import { IUserRepository } from '../../../../domain';
 import { UseCaseQuery } from '../../../interfaces';
 import { GetUserDataResponse } from './responsedto.';
 
 export class GetUserDataHandler implements UseCaseQuery<string, GetUserDataResponse> {
-   constructor(private readonly userRepository: UserRepository) {}
+   constructor(private readonly userRepository: IUserRepository) {}
    async execute(userId: string): Promise<GetUserDataResponse> {
       const user = await this.userRepository.findById(userId);
       if (!user) {

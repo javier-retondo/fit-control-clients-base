@@ -1,4 +1,4 @@
-import { Workout, WorkoutDto, WorkoutRepository } from '../../../../domain';
+import { Workout, WorkoutDto, IWorkoutRepository } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { CreateWorkoutRequest } from './request.dto';
 
@@ -6,7 +6,7 @@ export class CreateWorkoutHandler
    implements UseCaseCommandInterface<CreateWorkoutRequest, WorkoutDto>
 {
    constructor(
-      private readonly workoutRepository: WorkoutRepository,
+      private readonly workoutRepository: IWorkoutRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
 

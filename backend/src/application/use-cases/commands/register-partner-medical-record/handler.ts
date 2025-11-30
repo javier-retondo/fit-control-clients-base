@@ -1,4 +1,4 @@
-import { MedicalRecord, MedicalRecordDto, MedicalRecordRepository } from '../../../../domain';
+import { MedicalRecord, MedicalRecordDto, IMedicalRecordRepository } from '../../../../domain';
 import { IdGenerator, UseCaseCommandInterface } from '../../../interfaces';
 import { RegisterPartnerMedicalRecordRequest } from './request.dto';
 
@@ -6,7 +6,7 @@ export class RegisterPartnerMedicalRecordHandler
    implements UseCaseCommandInterface<RegisterPartnerMedicalRecordRequest, MedicalRecordDto>
 {
    constructor(
-      private readonly medicalRecord: MedicalRecordRepository,
+      private readonly medicalRecord: IMedicalRecordRepository,
       private readonly idGenerator: IdGenerator,
    ) {}
 

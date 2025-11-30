@@ -1,4 +1,4 @@
 import { Subscription, SubscriptionDto } from '../entities';
 import { IBaseRepository } from '../interfaces';
 
-export interface SubscriptionRepository extends IBaseRepository<Subscription, SubscriptionDto> {}
+export interface ISubscriptionRepository extends IBaseRepository<Subscription, SubscriptionDto> {}

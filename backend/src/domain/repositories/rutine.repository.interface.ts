@@ -1,4 +1,4 @@
 import { Rutine, RutineDto } from '../entities';
 import { IBaseRepository } from '../interfaces';
 
-export interface RutineRepository extends IBaseRepository<Rutine, RutineDto> {}
+export interface IRutineRepository extends IBaseRepository<Rutine, RutineDto> {}

@@ -1,4 +1,4 @@
-import { User, UserDto, UserRepository } from '../../../../domain';
+import { User, UserDto, IUserRepository } from '../../../../domain';
 import {
    IdGenerator,
    INotificationService,
@@ -11,7 +11,7 @@ import { CreateUserRequest } from './request.dto';
 
 export class CreateAdminUserHandler implements UseCaseCommandInterface<CreateUserRequest, UserDto> {
    constructor(
-      private readonly userRepository: UserRepository,
+      private readonly userRepository: IUserRepository,
       private readonly notificationService: INotificationService,
       private readonly idGenerator: IdGenerator,
       private readonly passwordHashService: PasswordHashService,
